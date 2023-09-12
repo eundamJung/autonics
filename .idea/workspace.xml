@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="42ce2c0c-bdcb-42d7-a14f-1c68e2f15a95" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tool/printManager" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tool/printManager/ActiveLoad.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tool/printManager/PrintListPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tool/printManager/PrintListPanel.jfd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tool/printManager/PrintManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/tool/printManager/PrintManager.jfd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileManager.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/logback-classic-1.2.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logback-classic-1.2.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/logback-core-1.2.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logback-core-1.2.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.32.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/slf4j-api-1.7.32.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tool/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tool/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tool/publish/ReceivedPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tool/publish/ReceivedPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/tool/common/resource/StringResource.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/tool/common/resource/StringResource.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/tool/print/ServiceDialog.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="2MiBU5qSH1RIgTsMyJ0fFpNuGGg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/tool/PrintManager" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.29319373" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\WorkspaceFileManager\FileManager\src\main\java\com\tool\PrintManager" />
+      <recent name="C:\WorkspaceFileManager\FileManager\src\main\java\com\tool" />
+      <recent name="C:\WorkspaceFileManager\FileManager\lib" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="FileManager" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.tool.FileManager" />
+      <module name="FileManager" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\d1\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\WorkspaceFileManager\FileManager" />
+          <option name="myCopyRoot" value="C:\WorkspaceFileManager\FileManager" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\WorkspaceFileManager\FileManager" />
+          <option name="myCopyRoot" value="C:\WorkspaceFileManager\FileManager" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="42ce2c0c-bdcb-42d7-a14f-1c68e2f15a95" name="Changes" comment="" />
+      <created>1678240537519</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678240537519</updated>
+      <workItem from="1678240539124" duration="393000" />
+      <workItem from="1678240962072" duration="14712000" />
+      <workItem from="1678851427779" duration="737000" />
+      <workItem from="1678925079306" duration="588000" />
+      <workItem from="1679365675813" duration="1148000" />
+      <workItem from="1679622906753" duration="3713000" />
+      <workItem from="1680657782819" duration="9630000" />
+      <workItem from="1681779064115" duration="613000" />
+      <workItem from="1681885465602" duration="584000" />
+      <workItem from="1682320855426" duration="588000" />
+      <workItem from="1683518308006" duration="4829000" />
+      <workItem from="1684134891842" duration="29607000" />
+      <workItem from="1688002795397" duration="760000" />
+      <workItem from="1688085717862" duration="879000" />
+      <workItem from="1688799008190" duration="1266000" />
+      <workItem from="1689126668665" duration="332000" />
+      <workItem from="1689127033841" duration="576000" />
+      <workItem from="1689322097558" duration="410000" />
+      <workItem from="1689322543210" duration="1174000" />
+      <workItem from="1689638706079" duration="641000" />
+      <workItem from="1689818293880" duration="1201000" />
+      <workItem from="1690157869015" duration="2419000" />
+      <workItem from="1691711647159" duration="1029000" />
+      <workItem from="1692145053537" duration="1779000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/tool/publish/ReceivedPanel.java</url>
+          <line>320</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

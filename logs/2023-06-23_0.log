@@ -1,0 +1,9 @@
+2023-06-23 04:11:22.867 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-06-23 04:11:40.865 | [pool-1-thread-1]        | com.tool.login.Login                 | WARN  | chjeong 로그인 실패
+2023-06-23 04:11:53.123 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | jhchung 로그인되었습니다.
+2023-06-23 04:11:56.373 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-06-23 04:11:56.628 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | jhchung 자격증명을 설정했습니다. | TFT TEST.Hyundai Everdigm.VPLMProjectLeader
+2023-06-23 04:12:50.100 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-06-23 04:12:58.874 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 002150 로그인되었습니다.
+2023-06-23 04:13:00.037 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-06-23 04:13:02.145 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 002150 자격증명을 설정했습니다. | PLM Master.Hyundai Everdigm.VPLMProjectLeader

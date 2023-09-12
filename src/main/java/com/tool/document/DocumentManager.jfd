@@ -1,0 +1,273 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
+				"hgap": 15
+			} ) {
+				name: "topPanel"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "topInnerPanel"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+						"alignment": 0
+						"vgap": 10
+						"hgap": 10
+					} ) {
+						name: "workPanel"
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "workLabel"
+							"text": "작업 공간"
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "workField"
+							"columns": 25
+							"editable": false
+							"preferredSize": new java.awt.Dimension( 0, 30 )
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "workBtn"
+							"text": "..."
+							"visible": false
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "workBtnActionPerformed", true ) )
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "Center"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+						"alignment": 2
+					} ) {
+						name: "InfoPanel"
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+							"hgap": 10
+							"vgap": 0
+							"alignment": 2
+						} ) {
+							name: "InfoPanel1"
+							"border": new javax.swing.border.EmptyBorder( 5, 0, 0, 5 )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "saveBufferLabel"
+								"foreground": new java.awt.Color( 102, 102, 102, 255 )
+								"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+							} )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "waitBufferLabel"
+								"foreground": new java.awt.Color( 102, 102, 102, 255 )
+								"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+							} )
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "East"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "centerTabbedPane"
+				add( new FormContainer( "javax.swing.JSplitPane", new FormLayoutManager( class javax.swing.JSplitPane ) ) {
+					name: "downloadSplitPane"
+					"dividerLocation": 300
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+						name: "downLeftPanel"
+						"border": new javax.swing.border.EmptyBorder( 10, 5, 5, 5 )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
+							"vgap": 4
+						} ) {
+							name: "searchPanel"
+							"border": new javax.swing.border.TitledBorder( "검색조건" )
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
+								"vgap": 5
+							} ) {
+								name: "searchTopPanel"
+								"opaque": false
+								"preferredSize": new java.awt.Dimension( 0, 45 )
+								"border": new javax.swing.border.EmptyBorder( 0, 5, 0, 5 )
+								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+									name: "searchProgressPanel"
+									"preferredSize": new java.awt.Dimension( 146, 4 )
+									add( new FormComponent( "javax.swing.JProgressBar" ) {
+										name: "searchProgress"
+										"preferredSize": new java.awt.Dimension( 146, 6 )
+										"visible": false
+									} )
+								}, new FormLayoutConstraints( class java.lang.String ) {
+									"value": "North"
+								} )
+								add( new FormComponent( "javax.swing.JButton" ) {
+									name: "searchBtn"
+									"background": new java.awt.Color( 66, 162, 218, 255 )
+									"foreground": sfield java.awt.Color white
+									"text": "검색"
+									addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "searchBtnActionPerformed", true ) )
+								}, new FormLayoutConstraints( class java.lang.String ) {
+									"value": "Center"
+								} )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "North"
+							} )
+							add( new FormComponent( "com.tool.document.DocumentSearchPanel" ) {
+								name: "searchFieldPanel"
+								"border": new javax.swing.border.EmptyBorder( 15, 0, 0, 0 )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "Center"
+							} )
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "Center"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "left"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+						name: "downRightPane"
+						"border": new javax.swing.border.EmptyBorder( 10, 5, 5, 5 )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+							name: "listPanel"
+							"border": new javax.swing.border.TitledBorder( "문서 리스트" )
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+								name: "listTopPanel"
+								"preferredSize": new java.awt.Dimension( 0, 50 )
+								"minimumSize": new java.awt.Dimension( 240, 45 )
+								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+									name: "listProgressPanel"
+									"preferredSize": new java.awt.Dimension( 146, 4 )
+									add( new FormComponent( "javax.swing.JProgressBar" ) {
+										name: "listProgress"
+										"preferredSize": new java.awt.Dimension( 146, 6 )
+										"visible": false
+										auxiliary() {
+											"JavaCodeGenerator.variableModifiers": 1
+										}
+									} )
+								}, new FormLayoutConstraints( class java.lang.String ) {
+									"value": "North"
+								} )
+								add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) {
+									"vgap": 4
+								} ) {
+									name: "listToolbarSearch"
+									add( new FormComponent( "com.tool.ui.combobox.TableFilterCombobox" ) {
+										name: "columnCombo"
+										"preferredSize": new java.awt.Dimension( 150, 30 )
+									} )
+									add( new FormComponent( "com.tool.ui.textfield.TableFilterTextField" ) {
+										name: "searchField"
+										"columns": 20
+										"preferredSize": new java.awt.Dimension( 226, 30 )
+									} )
+								}, new FormLayoutConstraints( class java.lang.String ) {
+									"value": "South"
+								} )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "North"
+							} )
+							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+								name: "listScrollPanel"
+								add( new FormComponent( "com.tool.ui.table.freeze.FreezeTable" ) {
+									name: "freezeTable"
+									auxiliary() {
+										"JavaCodeGenerator.variableModifiers": 1
+									}
+								} )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "Center"
+							} )
+							add( new FormComponent( "javax.swing.JLabel" ) {
+								name: "foundLabel"
+								"horizontalAlignment": 4
+								"text": "Found"
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "South"
+							} )
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "Center"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "right"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "문서검색"
+				} )
+				add( new FormContainer( "javax.swing.JSplitPane", new FormLayoutManager( class javax.swing.JSplitPane ) ) {
+					name: "uploadSplitPane"
+					"dividerLocation": 200
+					"focusable": false
+					"doubleBuffered": true
+					"orientation": 0
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+						name: "upTopPaneEmptyBorder"
+						"border": new javax.swing.border.EmptyBorder( 10, 5, 5, 0 )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+							name: "upTopPane"
+							"border": new javax.swing.border.TitledBorder( "업로드 대기" )
+							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+								name: "waitScrollPane"
+								add( new FormComponent( "com.tool.ui.table.selection.CheckboxTable" ) {
+									name: "waitTable"
+									auxiliary() {
+										"JavaCodeGenerator.variableModifiers": 1
+									}
+								} )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "Center"
+							} )
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "Center"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "left"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+						name: "upBottomPaneEmptyBorder"
+						"border": new javax.swing.border.EmptyBorder( 10, 5, 5, 5 )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+							name: "upBottomPane"
+							"border": new javax.swing.border.TitledBorder( "업로드 결과" )
+							add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+								name: "upBottomTop"
+								add( new FormComponent( "com.tool.ui.combobox.TableFilterCombobox" ) {
+									name: "uploadCombo"
+								} )
+								add( new FormComponent( "com.tool.ui.textfield.TableFilterTextField" ) {
+									name: "uploadSearchField"
+									"columns": 20
+								} )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "North"
+							} )
+							add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+								name: "uploadScrollPane"
+								add( new FormComponent( "javax.swing.JTable" ) {
+									name: "uploadTable"
+									auxiliary() {
+										"JavaCodeGenerator.variableModifiers": 1
+									}
+								} )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "Center"
+							} )
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "Center"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "right"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "자동 업로드"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 1085, 755 )
+		} )
+	}
+}

@@ -1,0 +1,507 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package com.tool.login;
+
+import com.tool.FileManager;
+import com.tool.FileManagerWindowEvent;
+import com.tool.common.resource.AppConfig;
+import com.tool.http.LoginHttpUtil;
+import com.tool.login.combo.AuthComboModel;
+import com.tool.login.combo.AuthComboRenderer;
+import com.tool.user.CollaborationSpace;
+import com.tool.user.Organization;
+import com.tool.user.Role;
+import com.tool.user.SecurityContext;
+import com.tool.user.UserComboVO;
+import com.tool.user.UserSession;
+import com.tool.util.ProcessUtil;
+import com.tool.util.StringUtil;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JProgressBar;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import org.apache.commons.lang3.StringUtils;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class Login extends JPanel {
+    FileManager fileManger;
+    private Logger logger = LoggerFactory.getLogger(Login.class);
+    String _Collabspace;
+    String _Organization;
+    String _Role;
+    UserSession session = null;
+    ProcessUtil process;
+    private JPanel imagePanel;
+    private JPanel cardPanel;
+    private JPanel loginPanel;
+    private JPanel loginTitle;
+    private JPanel loginEmptyBorder;
+    private JPanel loginCompPanel;
+    private JPanel loginCompInner;
+    private JPanel idPanle;
+    private JTextField idField;
+    private JPanel pwPanel;
+    private JPasswordField pwField;
+    private JPanel loginProgPanel;
+    private JProgressBar loginProg;
+    private JPanel loginButtonPanel;
+    private JButton loginButton;
+    private JPanel scPanel;
+    private JPanel scTitle;
+    private JPanel scEmptyBorder;
+    private JPanel scCompPanel;
+    private JPanel scCompInner;
+    private JPanel csComboPanel;
+    private JComboBox csCombo;
+    private JPanel orgComboPanel;
+    private JComboBox orgCombo;
+    private JPanel roleComboPanel;
+    private JComboBox roleCombo;
+    private JPanel scProgPanel;
+    private JProgressBar scProg;
+    private JPanel scButtonPanel;
+    private JButton scButton;
+
+    public Login(FileManager fileManager) {
+        this.fileManger = fileManager;
+        this.initComponents();
+        this.initAuthCombo();
+        Image image = AppConfig.getImageIcon("3DEXLoginCompass.png").getImage().getScaledInstance(256, 256, 4);
+        JLabel label = new JLabel(new ImageIcon(image));
+        this.imagePanel.add(label);
+        this.idField.setText(AppConfig.getUserConfig("login.user"));
+        this.pwField.setText(AppConfig.getUserConfig("login.pw"));
+    }
+
+    private void initAuthCombo() {
+        AuthComboModel csModel = new AuthComboModel();
+        this.csCombo.setModel(csModel);
+        this.csCombo.setRenderer(new AuthComboRenderer());
+        AuthComboModel orgModel = new AuthComboModel();
+        this.orgCombo.setModel(orgModel);
+        this.orgCombo.setRenderer(new AuthComboRenderer());
+        AuthComboModel roleModel = new AuthComboModel();
+        this.roleCombo.setModel(roleModel);
+        this.roleCombo.setRenderer(new AuthComboRenderer());
+    }
+
+    private void scButtonActionPerformed(ActionEvent e) {
+        this.setSecurityContext();
+    }
+
+    private void setSecurityContext() {
+        if (this.process.can()) {
+            this.process.start(this.scProg);
+            FileManager.executors.execute(() -> {
+                try {
+                    UserSession var10000 = this.session;
+                    String[] var10002 = new String[]{this._Role, this._Organization, this._Collabspace};
+                    var10000.setSecurityContext("ctx::" + String.join(".", var10002));
+                    if (this.fileManger.isStarted()) {
+                        JOptionPane.showMessageDialog(this, AppConfig.getString("message.securitycontext.change"), AppConfig.getString("securitycontext"), 1);
+                        this.fileManger.dispatchEvent(new FileManagerWindowEvent(this.fileManger, 201, false));
+                    } else {
+                        this.fileManger.start(this.session);
+                    }
+
+                    this.logger.info(AppConfig.getString("message.securitycontext.setting"), new Object[]{this.idField.getText(), this._Collabspace, this._Organization, this._Role});
+                } catch (Exception var5) {
+                    JOptionPane.showMessageDialog(this, var5.getMessage(), AppConfig.getString("securitycontext"), 0);
+                    this.logger.warn(AppConfig.getString("message.securitycontext.fail"), this.idField.getText(), var5.getMessage());
+                } finally {
+                    this.process.end(this.scProg);
+                }
+
+            });
+        }
+    }
+
+    private SecurityContext getSecurityContext() {
+        SecurityContext sc = new SecurityContext();
+        JSONObject pnOJson = LoginHttpUtil.getPnO(this.session);
+        JSONArray csArray = (JSONArray)pnOJson.get("collabspaces");
+
+        for(int idx = 0; idx < csArray.size(); ++idx) {
+            JSONObject csObj = (JSONObject)csArray.get(idx);
+            String csName = (String)csObj.get("name");
+            String csTitle = (String)StringUtils.defaultIfBlank((String)csObj.get("title"), csName);
+            JSONArray couples = (JSONArray)csObj.get("couples");
+            CollaborationSpace cs = new CollaborationSpace(csName, csTitle);
+
+            for(int i = 0; i < couples.size(); ++i) {
+                JSONObject coupleObj = (JSONObject)couples.get(i);
+                JSONObject orgObj = (JSONObject)coupleObj.get("organization");
+                JSONObject roleObj = (JSONObject)coupleObj.get("role");
+                cs.addRole(new Organization((String)orgObj.get("name"), (String)orgObj.get("title")), new Role((String)roleObj.get("name"), (String)roleObj.get("nls")));
+            }
+
+            sc.addCollaborationSpaces(cs);
+        }
+
+        JSONObject preferred = (JSONObject)pnOJson.get("preferredcredentials");
+        if (preferred != null) {
+            sc.setPreferredCredentials(StringUtil.NVL(((JSONObject)preferred.get("collabspace")).get("name")), StringUtil.NVL(((JSONObject)preferred.get("organization")).get("name")), StringUtil.NVL(((JSONObject)preferred.get("role")).get("name")));
+        }
+
+        return sc;
+    }
+
+    private void loginButtonActionPerformed(ActionEvent e) {
+        this.login();
+    }
+
+    private void login() {
+        if (this.process.can()) {
+            this.process.start(this.loginProg);
+            FileManager var10000 = this.fileManger;
+            FileManager.executors.execute(() -> {
+                try {
+                    String id = this.idField.getText().trim();
+                    String pw = new String(this.pwField.getPassword());
+                    if (StringUtils.isEmpty(id)) {
+                        JOptionPane.showMessageDialog(this, AppConfig.getString("message.login.emptyid"), AppConfig.getString("login"), 2);
+                        this.idField.requestFocus();
+                        return;
+                    }
+
+                    if (!StringUtils.isEmpty(pw)) {
+                        this.session = LoginHttpUtil.login(id, pw);
+                        if (this.session != null) {
+                            SecurityContext sc = this.getSecurityContext();
+                            this._Collabspace = sc.getPreferredCollabspace();
+                            this._Organization = sc.getPreferredOrganization();
+                            this._Role = sc.getPreferredRole();
+                            CollaborationSpace cs = sc.getCollaborationSpace(this._Collabspace);
+                            if (cs != null) {
+                                ((AuthComboModel)this.csCombo.getModel()).addAll(sc.getCollaborationSpaces());
+                                this.csCombo.setSelectedItem(cs);
+                            }
+
+                            CardLayout layout = (CardLayout)this.cardPanel.getLayout();
+                            layout.next(this.cardPanel);
+                            this.csCombo.requestFocus();
+                            this.logger.info(AppConfig.getString("log.login.complete"), id);
+                        }
+
+                        return;
+                    }
+
+                    JOptionPane.showMessageDialog(this, AppConfig.getString("message.login.emptypassword"), AppConfig.getString("login"), 2);
+                    this.pwField.requestFocus();
+                } catch (Exception var9) {
+                    JOptionPane.showMessageDialog(this, var9.getMessage(), AppConfig.getString("login"), 0);
+                    this.logger.warn(AppConfig.getString("log.login.fail"), this.idField.getText(), var9.getMessage());
+                    return;
+                } finally {
+                    this.process.end(this.loginProg);
+                }
+
+            });
+        }
+    }
+
+    private void csComboItemStateChanged(ItemEvent e) {
+        CollaborationSpace cs = (CollaborationSpace)e.getItem();
+        String csName = cs.getName();
+        AuthComboModel model = (AuthComboModel)this.orgCombo.getModel();
+        if (e.getStateChange() == 2) {
+            this._Organization = "";
+            model.removeAllElements();
+        } else if (e.getStateChange() == 1) {
+            this._Collabspace = csName;
+            model.addAll(cs.getOrganizations());
+            if (StringUtils.isEmpty(this._Organization)) {
+                this._Organization = ((UserComboVO)model.getElementAt(0)).getName();
+            }
+
+            this.orgCombo.setSelectedItem(cs.getOrganization(this._Organization));
+        }
+
+    }
+
+    private void orgComboItemStateChanged(ItemEvent e) {
+        Organization org = (Organization)e.getItem();
+        String orgName = org.getName();
+        AuthComboModel model = (AuthComboModel)this.roleCombo.getModel();
+        if (e.getStateChange() == 2) {
+            this._Role = "";
+            model.removeAllElements();
+        } else if (e.getStateChange() == 1) {
+            this._Organization = orgName;
+            model.addAll(org.getRoles());
+            if (StringUtils.isEmpty(this._Role)) {
+                this._Role = ((UserComboVO)model.getElementAt(0)).getName();
+            }
+
+            this.roleCombo.setSelectedItem(org.getRole(this._Role));
+        }
+
+    }
+
+    private void roleComboItemStateChanged(ItemEvent e) {
+        Role role = (Role)e.getItem();
+        String roleName = role.getName();
+        if (e.getStateChange() == 1) {
+            this._Role = roleName;
+        }
+
+    }
+
+    private void idFieldKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.login();
+        }
+
+    }
+
+    private void pwFieldKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.login();
+        }
+
+    }
+
+    private void loginButtonKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.login();
+        }
+
+    }
+
+    private void scButtonKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.setSecurityContext();
+        }
+
+    }
+
+    private void csComboKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.setSecurityContext();
+        }
+
+    }
+
+    private void orgComboKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.setSecurityContext();
+        }
+
+    }
+
+    private void roleComboKeyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 10) {
+            this.setSecurityContext();
+        }
+
+    }
+
+    private void initComponents() {
+        this.imagePanel = new JPanel();
+        this.cardPanel = new JPanel();
+        this.loginPanel = new JPanel();
+        this.loginTitle = new JPanel();
+        this.loginEmptyBorder = new JPanel();
+        this.loginCompPanel = new JPanel();
+        this.loginCompInner = new JPanel();
+        this.idPanle = new JPanel();
+        this.idField = new JTextField();
+        this.pwPanel = new JPanel();
+        this.pwField = new JPasswordField();
+        this.loginProgPanel = new JPanel();
+        this.loginProg = new JProgressBar();
+        this.loginButtonPanel = new JPanel();
+        this.loginButton = new JButton();
+        this.scPanel = new JPanel();
+        this.scTitle = new JPanel();
+        this.scEmptyBorder = new JPanel();
+        this.scCompPanel = new JPanel();
+        this.scCompInner = new JPanel();
+        this.csComboPanel = new JPanel();
+        this.csCombo = new JComboBox();
+        this.orgComboPanel = new JPanel();
+        this.orgCombo = new JComboBox();
+        this.roleComboPanel = new JPanel();
+        this.roleCombo = new JComboBox();
+        this.scProgPanel = new JPanel();
+        this.scProg = new JProgressBar();
+        this.scButtonPanel = new JPanel();
+        this.scButton = new JButton();
+        this.setBorder(new EmptyBorder(20, 20, 20, 20));
+        this.setBackground(new Color(25, 98, 138));
+        this.setLayout(new GridLayout(1, 2));
+        this.imagePanel.setBackground(new Color(25, 98, 138));
+        this.imagePanel.setLayout(new BorderLayout());
+        this.add(this.imagePanel);
+        this.cardPanel.setLayout(new CardLayout());
+        this.loginPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.loginPanel.setLayout(new GridLayout());
+        this.loginTitle.setBorder(new TitledBorder((Border)null, "3D EXPERIENCE ID", 0, 1, new Font("맑은 고딕", 0, 14)));
+        this.loginTitle.setLayout(new BorderLayout());
+        this.loginEmptyBorder.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.loginEmptyBorder.setLayout(new BorderLayout());
+        this.loginCompPanel.setLayout(new BorderLayout());
+        this.loginCompInner.setLayout(new GridLayout(2, 1, 0, 5));
+        this.idPanle.setBorder(new TitledBorder(BorderFactory.createEmptyBorder(), "ID"));
+        this.idPanle.setLayout(new GridLayout());
+        this.idField.setPreferredSize(new Dimension(49, 35));
+        this.idField.setFont(new Font("맑은 고딕", 0, 16));
+        this.idField.setForeground(new Color(119, 119, 119));
+        this.idField.setToolTipText("ID");
+        this.idField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.idFieldKeyPressed(e);
+            }
+        });
+        this.idPanle.add(this.idField);
+        this.loginCompInner.add(this.idPanle);
+        this.pwPanel.setBorder(new TitledBorder(BorderFactory.createEmptyBorder(), "PW"));
+        this.pwPanel.setLayout(new GridLayout());
+        this.pwField.setPreferredSize(new Dimension(49, 35));
+        this.pwField.setFont(new Font("Monospaced", 0, 16));
+        this.pwField.setForeground(new Color(119, 119, 119));
+        this.pwField.setToolTipText("PASSWORD");
+        this.pwField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.pwFieldKeyPressed(e);
+            }
+        });
+        this.pwPanel.add(this.pwField);
+        this.loginCompInner.add(this.pwPanel);
+        this.loginCompPanel.add(this.loginCompInner, "Center");
+        this.loginEmptyBorder.add(this.loginCompPanel, "Center");
+        this.loginTitle.add(this.loginEmptyBorder, "North");
+        this.loginProgPanel.setBorder(new EmptyBorder(0, 20, 0, 20));
+        this.loginProgPanel.setLayout(new BorderLayout());
+        this.loginProg.setVisible(false);
+        this.loginProgPanel.add(this.loginProg, "North");
+        this.loginTitle.add(this.loginProgPanel, "Center");
+        this.loginButtonPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.loginButtonPanel.setLayout(new BorderLayout());
+        this.loginButton.setText("로그인");
+        this.loginButton.setPreferredSize(new Dimension(78, 45));
+        this.loginButton.setBackground(new Color(66, 162, 218));
+        this.loginButton.setForeground(Color.white);
+        this.loginButton.setFont(new Font("맑은 고딕", 0, 14));
+        this.loginButton.addActionListener((e) -> {
+            this.loginButtonActionPerformed(e);
+        });
+        this.loginButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.loginButtonKeyPressed(e);
+            }
+        });
+        this.loginButtonPanel.add(this.loginButton, "North");
+        this.loginTitle.add(this.loginButtonPanel, "South");
+        this.loginPanel.add(this.loginTitle);
+        this.cardPanel.add(this.loginPanel, "card1");
+        this.scPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        this.scPanel.setLayout(new GridLayout());
+        this.scTitle.setBorder(new TitledBorder((Border)null, "자격증명", 0, 1, new Font("맑은 고딕", 0, 14)));
+        this.scTitle.setLayout(new BorderLayout());
+        this.scEmptyBorder.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.scEmptyBorder.setLayout(new BorderLayout());
+        this.scCompPanel.setLayout(new BorderLayout());
+        this.scCompInner.setLayout(new GridLayout(3, 1, 0, 5));
+        this.csComboPanel.setBorder(new TitledBorder(BorderFactory.createEmptyBorder(), "협업 공간", 4, 3));
+        this.csComboPanel.setLayout(new GridLayout());
+        this.csCombo.setPreferredSize(new Dimension(82, 35));
+        this.csCombo.setFont(new Font("맑은 고딕", 0, 14));
+        this.csCombo.setForeground(new Color(119, 119, 119));
+        this.csCombo.addItemListener((e) -> {
+            this.csComboItemStateChanged(e);
+        });
+        this.csCombo.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.csComboKeyPressed(e);
+            }
+        });
+        this.csComboPanel.add(this.csCombo);
+        this.scCompInner.add(this.csComboPanel);
+        this.orgComboPanel.setBorder(new TitledBorder(BorderFactory.createEmptyBorder(), "조직", 4, 3));
+        this.orgComboPanel.setLayout(new GridLayout());
+        this.orgCombo.setPreferredSize(new Dimension(82, 35));
+        this.orgCombo.setFont(new Font("맑은 고딕", 0, 14));
+        this.orgCombo.setForeground(new Color(119, 119, 119));
+        this.orgCombo.addItemListener((e) -> {
+            this.orgComboItemStateChanged(e);
+        });
+        this.orgCombo.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.orgComboKeyPressed(e);
+            }
+        });
+        this.orgComboPanel.add(this.orgCombo);
+        this.scCompInner.add(this.orgComboPanel);
+        this.roleComboPanel.setBorder(new TitledBorder(BorderFactory.createEmptyBorder(), "엑세스 역할", 4, 3));
+        this.roleComboPanel.setLayout(new GridLayout());
+        this.roleCombo.setPreferredSize(new Dimension(82, 35));
+        this.roleCombo.setFont(new Font("맑은 고딕", 0, 14));
+        this.roleCombo.setForeground(new Color(119, 119, 119));
+        this.roleCombo.addItemListener((e) -> {
+            this.roleComboItemStateChanged(e);
+        });
+        this.roleCombo.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.roleComboKeyPressed(e);
+            }
+        });
+        this.roleComboPanel.add(this.roleCombo);
+        this.scCompInner.add(this.roleComboPanel);
+        this.scCompPanel.add(this.scCompInner, "Center");
+        this.scEmptyBorder.add(this.scCompPanel, "Center");
+        this.scTitle.add(this.scEmptyBorder, "North");
+        this.scProgPanel.setBorder(new EmptyBorder(0, 20, 0, 20));
+        this.scProgPanel.setLayout(new BorderLayout());
+        this.scProg.setVisible(false);
+        this.scProgPanel.add(this.scProg, "North");
+        this.scTitle.add(this.scProgPanel, "Center");
+        this.scButtonPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.scButtonPanel.setLayout(new BorderLayout());
+        this.scButton.setText("확인");
+        this.scButton.setPreferredSize(new Dimension(78, 45));
+        this.scButton.setBackground(new Color(66, 162, 218));
+        this.scButton.setForeground(Color.white);
+        this.scButton.setFont(new Font("맑은 고딕", 0, 14));
+        this.scButton.addActionListener((e) -> {
+            this.scButtonActionPerformed(e);
+        });
+        this.scButton.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                Login.this.scButtonKeyPressed(e);
+            }
+        });
+        this.scButtonPanel.add(this.scButton, "North");
+        this.scTitle.add(this.scButtonPanel, "South");
+        this.scPanel.add(this.scTitle);
+        this.cardPanel.add(this.scPanel, "card2");
+        this.add(this.cardPanel);
+        this.process = new ProcessUtil(this);
+    }
+}

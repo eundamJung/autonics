@@ -1,0 +1,37 @@
+#session time(\ubd84)
+session.timeout=60
+#Buffer Time(\ucd08)
+workspace.monitor.interval=1
+upload.wait.buffer=5
+upload.wait.check.interval=1
+#Servcie url
+service.baseurl=tplm.hyundaieverdigm.com
+service.cache.clearcache=/services/v1/filemanager/clearcache
+service.session.timeout=/services/v1/filemanager/timeout/{}
+service.session.healthCheck=/services/v1/filemanager/healthcheck
+service.functions=/services/v1/filemanager/functions
+service.session.invalidate=/services/v1/filemanager/invalidate
+service.user.pno=/resources/modeler/pno/person?current=true&select=collabspaces&select=preferredcredentials
+service.user.securitycontext=/services/v1/filemanager/securitycontext
+service.file.info=/services/v1/filemanager/file/info/{}/{}/{}
+service.file.search=/services/v1/filemanager/file/search
+service.file.precheckout=/services/v1/filemanager/file/precheckout/{}/{}/{}/{}
+service.file.checkout=/services/v1/filemanager/file/checkout/{}/{}/{}/{}
+service.file.precheckin=/services/v1/filemanager/file/precheckin/{}/{}/{}
+service.file.checkin=/services/v1/filemanager/file/checkin
+service.file.lockunlock=/services/v1/filemanager/file/lockunlock/{}/{}/{}/{}
+service.pno.organization=/services/v1/filemanager/organization
+service.pno.member=/services/v1/filemanager/organization/member/{}
+service.publish.search=/services/v1/filemanager/publish/search/{}
+service.publish.accept=/services/v1/filemanager/publish/accept
+service.publish.download=/services/v1/filemanager/publish/download
+service.publish.update.count=/services/v1/filemanager/publish/update
+service.publish.download.precheck=/services/v1/filemanager/publish/download/precheck
+service.publish.print=/services/v1/filemanager/publish/print
+service.publish.print.increase=/services/v1/filemanager/publish/print/increase/{}
+service.publish.view=/services/v1/filemanager/publish/view
+service.publish.info=/services/v1/filemanager/publish/info/{}
+service.publish.transferownership=/services/v1/filemanager/publish/transferownership
+service.publish.printservice=/services/v1/filemanager/publish/printservice
+#date format
+dateformat.upload=yyyy-MM-dd HH:mm:ss

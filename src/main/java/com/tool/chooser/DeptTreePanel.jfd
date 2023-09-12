@@ -1,0 +1,79 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			auxiliary() {
+				"JavaCodeGenerator.customCreateCode": "new DeptUserList(this)"
+			}
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "listPanel"
+				"border": new javax.swing.border.EmptyBorder( 10, 5, 5, 5 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "listTopPanel"
+					"preferredSize": new java.awt.Dimension( 0, 50 )
+					"minimumSize": new java.awt.Dimension( 240, 45 )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+						name: "listProgressPanle"
+						"preferredSize": new java.awt.Dimension( 146, 4 )
+						add( new FormComponent( "javax.swing.JProgressBar" ) {
+							name: "listProgress"
+							"preferredSize": new java.awt.Dimension( 146, 6 )
+							"visible": false
+							auxiliary() {
+								"JavaCodeGenerator.variableModifiers": 1
+							}
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "North"
+					} )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+						name: "listToolbarPanel"
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+							name: "listToolbarSearch"
+							add( new FormComponent( "com.tool.ui.textfield.TableFilterTextField" ) {
+								name: "filterField"
+								"columns": 20
+								"preferredSize": new java.awt.Dimension( 226, 30 )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "Center"
+							} )
+							add( new FormComponent( "javax.swing.JButton" ) {
+								name: "expandAllBtn"
+								"text": "Expand All"
+								addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "expandAllBtnActionPerformed", true ) )
+							}, new FormLayoutConstraints( class java.lang.String ) {
+								"value": "East"
+							} )
+						}, new FormLayoutConstraints( class java.lang.String ) {
+							"value": "North"
+						} )
+					}, new FormLayoutConstraints( class java.lang.String ) {
+						"value": "South"
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "First"
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "listScrollPanel"
+					add( new FormComponent( "com.tool.chooser.DeptTree" ) {
+						name: "tree"
+						auxiliary() {
+							"JavaCodeGenerator.variableModifiers": 1
+							"JavaCodeGenerator.customCreateCode": "new DeptTree(this);"
+						}
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

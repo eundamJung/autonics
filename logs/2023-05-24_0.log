@@ -1,0 +1,9 @@
+2023-05-24 07:13:45.987 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-24 07:15:31.870 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-24 07:16:24.728 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 1107001 로그인되었습니다.
+2023-05-24 07:16:28.523 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-05-24 07:16:29.014 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 1107001 자격증명을 설정했습니다. | FE Dev.Hyundai Everdigm.VPLMProjectLeader
+2023-05-24 07:21:13.536 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-24 07:21:22.398 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 1107001 로그인되었습니다.
+2023-05-24 07:21:23.146 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-05-24 07:21:23.293 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 1107001 자격증명을 설정했습니다. | FE Dev.Hyundai Everdigm.VPLMProjectLeader

@@ -1,0 +1,13 @@
+2023-05-08 03:59:03.436 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-08 03:59:16.476 | [pool-1-thread-1]        | com.tool.login.Login                 | WARN  | admin_platform 로그인 실패
+2023-05-08 03:59:20.154 | [Thread-3]               | com.tool.FileManager                 | WARN  | 파일 매니저 종료.
+2023-05-08 04:23:35.422 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-08 04:23:43.186 | [pool-1-thread-1]        | com.tool.login.Login                 | WARN  | admin_platform 로그인 실패
+2023-05-08 04:23:45.448 | [Thread-3]               | com.tool.FileManager                 | WARN  | 파일 매니저 종료.
+2023-05-08 04:24:14.082 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-08 04:24:29.578 | [pool-1-thread-1]        | com.tool.login.Login                 | WARN  | admin_platform 로그인 실패
+2023-05-08 04:24:36.274 | [Thread-3]               | com.tool.FileManager                 | WARN  | 파일 매니저 종료.
+2023-05-08 04:40:34.044 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-08 04:40:40.883 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-05-08 04:40:46.134 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-05-08 04:40:46.548 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader

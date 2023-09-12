@@ -1,0 +1,1 @@
+start ./jre/bin/javaw -Dfile.encoding=UTF-8 -jar FileManager.jar

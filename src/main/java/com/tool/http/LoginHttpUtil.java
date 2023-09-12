@@ -1,0 +1,255 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+package com.tool.http;
+
+import com.tool.common.resource.AppConfig;
+import com.tool.user.UserSession;
+import com.tool.util.ExceptionUtil;
+import com.tool.util.StringUtil;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpHost;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.client.utils.URIUtils;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class LoginHttpUtil extends HttpCommon {
+    private static Logger logger = LoggerFactory.getLogger(LoginHttpUtil.class);
+
+    public LoginHttpUtil() {
+    }
+
+    /** @deprecated */
+    @Deprecated
+    public static JSONObject setSecurityContext(UserSession session, String collabspace, String organization, String role) {
+        JSONObject resultJson = new JSONObject();
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        try {
+            HttpPut httpReq = new HttpPut(SERVICE_USER_SECURITYCONTEXT);
+            Map<String, String> paramMap = new HashMap();
+            paramMap.put("collabspace", collabspace);
+            paramMap.put("organization", organization);
+            paramMap.put("role", role);
+            httpReq.setEntity(paramMapToFormEntity(paramMap));
+            CloseableHttpResponse httpResp = httpClient.execute(httpReq);
+            int status = httpResp.getStatusLine().getStatusCode();
+            String content = getStringFromStream(httpResp.getEntity().getContent());
+            if (status != 200 && status != 500) {
+                throw new Exception("HTTP status codes " + status);
+            }
+
+            resultJson = (JSONObject)(new JSONParser()).parse(content);
+        } catch (Exception var14) {
+            var14.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+        return resultJson;
+    }
+
+    public static JSONObject getPnO(UserSession session) {
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        try {
+            HttpGet httpReq = new HttpGet(SERVICE_USER_PNO);
+            CloseableHttpResponse httpResp = httpClient.execute(httpReq);
+            JSONObject result = (JSONObject)(new JSONParser()).parse(getStringFromStream(httpResp.getEntity().getContent()));
+            JSONObject var5 = result;
+            return var5;
+        } catch (Exception var9) {
+            var9.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+        return null;
+    }
+
+    public static UserSession login(String id, String password) throws Exception {
+        UserSession session = new UserSession(id, password);
+        BasicCookieStore cookieStore = new BasicCookieStore();
+        CloseableHttpClient httpClient = null;
+
+        try {
+            String loginTicket = getLoginTicket(cookieStore);
+            if (loginTicket == null) {
+                throw new Exception(AppConfig.getString("message.login.unableticket"));
+            }
+
+            httpClient = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).setRedirectStrategy(new LaxRedirectStrategy()).build();
+            HttpClientContext clientContext = HttpClientContext.create();
+            String var10002 = SERVICE_AUTHENTICATION_LOGIN;
+            HttpPost httpReq = new HttpPost(var10002 + "?service=" + getSapceUrl());
+            Map<String, String> paramMap = new HashMap();
+            paramMap.put("lt", loginTicket);
+            paramMap.put("username", id);
+            paramMap.put("password", password);
+            ArrayList<NameValuePair> postParams = new ArrayList();
+            Iterator var10 = paramMap.entrySet().iterator();
+
+            while(var10.hasNext()) {
+                Entry<String, String> entry = (Entry)var10.next();
+                postParams.add(new BasicNameValuePair((String)entry.getKey(), (String)entry.getValue()));
+            }
+
+            httpReq.setEntity(paramMapToFormEntity(paramMap));
+            CloseableHttpResponse httpResp = httpClient.execute(httpReq, clientContext);
+            int statusCode = httpResp.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                throw new Exception(StringUtil.replaceStr(AppConfig.getString("message.login.requestfail"), new String[]{String.valueOf(statusCode)}));
+            }
+
+            HttpHost target = clientContext.getTargetHost();
+            List<URI> redirectLocations = clientContext.getRedirectLocations();
+            URI location = URIUtils.resolve(httpReq.getURI(), target, redirectLocations);
+            if (location.getQuery().indexOf("ticket=") <= -1) {
+                throw new Exception(AppConfig.getString("message.login.fail"));
+            }
+            session.setCookieStore(cookieStore);
+            setSessionTimeOut(session);
+        } catch (Exception var18) {
+            throw var18;
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+        return session;
+    }
+
+    public static String getLoginTicket(BasicCookieStore cookieStore) {
+        String loginTicket = null;
+        CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultCookieStore(cookieStore).build();
+
+        try {
+            HttpGet httpReq = new HttpGet(SERVICE_LOGIN_TICKET_GET);
+            CloseableHttpResponse httpResp = httpClient.execute(httpReq);
+            if (httpResp.getStatusLine().getStatusCode() == 200) {
+                loginTicket = (String)((JSONObject)(new JSONParser()).parse(getStringFromStream(httpResp.getEntity().getContent()))).get("lt");
+            }
+        } catch (Exception var8) {
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+        return loginTicket;
+    }
+
+    public static void setSessionTimeOut(UserSession session) {
+        int defaultTime = Integer.parseInt(AppConfig.getAppConfig("session.timeout"));
+        int time = defaultTime;
+
+        try {
+            time = Integer.parseInt(AppConfig.getUserConfig("session.timeout"));
+        } catch (Exception var11) {
+        }
+
+        if (time < defaultTime) {
+            time = defaultTime;
+        }
+
+        if (time > 1440) {
+            time = 1440;
+        }
+
+        time *= 60;
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        try {
+            HttpPut httpReq = new HttpPut(StringUtil.replaceStr(SERVICE_SESSION_TIMEOUT, new String[]{String.valueOf(time)}));
+            httpClient.execute(httpReq);
+        } catch (Exception var9) {
+            var9.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+    }
+
+    public static void invalidateSession(UserSession session) {
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        try {
+            HttpPut httpReq = new HttpPut(StringUtil.replaceStr(SERVICE_SESSION_INVALIDATE, new String[0]));
+            httpClient.execute(httpReq);
+        } catch (Exception var6) {
+            var6.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+    }
+
+    public static JSONObject getFunctions(UserSession session) {
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        JSONObject var3;
+        try {
+            HttpGet httpReq = new HttpGet(SERVICE_FUNCTIONS);
+            CloseableHttpResponse httpResp = httpClient.execute(httpReq);
+            JSONObject var4 = (JSONObject)(new JSONParser()).parse(getStringFromStream(httpResp.getEntity().getContent()));
+            return var4;
+        } catch (Exception var8) {
+            var3 = ExceptionUtil.createErrorJson(var8);
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+        return var3;
+    }
+
+    public static void clearCache(UserSession session) {
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        try {
+            HttpPut httpReq = new HttpPut(StringUtil.replaceStr(SERVICE_CACHE_CLEARCACHE, new String[0]));
+            httpClient.execute(httpReq);
+        } catch (Exception var6) {
+            var6.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+    }
+
+    public static JSONObject healthCheck(UserSession session) {
+        CloseableHttpClient httpClient = getHttpClient(session);
+
+        try {
+            HttpGet httpReq = new HttpGet(SERVICE_SESSION_HEALTHCHECK);
+            CloseableHttpResponse httpResp = httpClient.execute(httpReq);
+            JSONObject result = (JSONObject)(new JSONParser()).parse(getStringFromStream(httpResp.getEntity().getContent()));
+            JSONObject var5 = result;
+            return var5;
+        } catch (Exception var9) {
+            var9.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(httpClient);
+        }
+
+        return null;
+    }
+}

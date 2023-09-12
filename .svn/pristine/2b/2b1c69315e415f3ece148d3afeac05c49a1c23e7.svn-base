@@ -1,0 +1,89 @@
+JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.12" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) {
+				"columns": 1
+				"rows": 7
+				"hgap": 5
+				"vgap": 5
+			} ) {
+				name: "searchGrid"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "nameBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "문서번호" )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "nameFiled"
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "nameFiledKeyPressed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "titleBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "제목" )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "titleField"
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "titleFieldKeyPressed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "fileNameBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "파일" )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "fileNameField"
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "fileNameFieldKeyPressed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "originatedFromBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "작성일 From" )
+					add( new FormComponent( "org.jdatepicker.JDatePicker" ) {
+						name: "originatedFrom"
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "originatedFromKeyPressed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "originatedToBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "작성일 To" )
+					add( new FormComponent( "org.jdatepicker.JDatePicker" ) {
+						name: "originatedTo"
+						addEvent( new FormEvent( "java.awt.event.KeyListener", "keyPressed", "originatedToKeyPressed", true ) )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "currentBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "State" )
+					"visible": false
+					add( new FormComponent( "javax.swing.JComboBox" ) {
+						name: "currentCombo"
+						"preferredSize": new java.awt.Dimension( 82, 30 )
+						"model": new javax.swing.DefaultComboBoxModel {
+							selectedItem: " "
+							addElement( " " )
+							addElement( "PRIVATE" )
+							addElement( "IN_WORK" )
+							addElement( "FROZEN" )
+							addElement( "RELEASED" )
+						}
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
+					name: "ownerBorder"
+					"border": new javax.swing.border.TitledBorder( new javax.swing.border.EmptyBorder( 0, 0, 0, 0 ), "Owner" )
+					"visible": false
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "ownerField"
+						"visible": false
+					} )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "North"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 515 )
+		} )
+	}
+}

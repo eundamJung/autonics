@@ -1,0 +1,4 @@
+2023-05-09 05:25:41.778 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-05-09 05:25:48.392 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-05-09 05:25:52.871 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-05-09 05:25:53.415 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader

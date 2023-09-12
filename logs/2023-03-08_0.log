@@ -1,0 +1,44 @@
+2023-03-08 02:13:51.232 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 02:18:28.545 | [Thread-3]               | com.tool.FileManager                 | WARN  | 파일 매니저 종료.
+2023-03-08 03:50:25.471 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 03:50:40.731 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | jhchung 로그인되었습니다.
+2023-03-08 03:50:45.079 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 03:50:45.687 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | jhchung 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 04:07:14.460 | [Thread-3]               | com.tool.FileManager                 | WARN  | 파일 매니저 종료.
+2023-03-08 04:09:21.917 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 04:09:29.169 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 04:09:30.382 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 04:09:30.646 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 06:18:04.932 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 06:18:11.194 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 06:18:12.726 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 06:18:12.930 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 06:18:39.790 | [AWT-EventQueue-0]       | com.tool.document.DocumentManager    | INFO  | Document Manager - 시작
+2023-03-08 06:18:39.794 | [AWT-EventQueue-0]       | com.tool.document.DocumentManager    | INFO  | C:\Users\d1\AppData\Local\Temp\FileManager 작업 공간 설정.
+2023-03-08 06:18:39.846 | [AWT-EventQueue-0]       | c.t.d.s.watch.FileWatchService       | INFO  | 파일 모니터링 서비스 - 시작
+2023-03-08 06:19:01.620 | [pool-1-thread-1]        | c.t.d.services.watch.DownloadWorker  | INFO  | 2. 정보활용능력_2CC83E7701AEA3E6E4F3A8BCB3C94DC7.pptx 파일 다운로드 완료.
+2023-03-08 06:19:09.145 | [Thread-4]               | c.t.d.s.watch.FileWatchService       | ERROR | ppt5CCA.tmp 메타데이터가(다운로드 정보) 없습니다.
+2023-03-08 06:19:15.634 | [pool-1-thread-1]        | c.t.d.services.watch.UploadService   | INFO  | 2. 정보활용능력_2CC83E7701AEA3E6E4F3A8BCB3C94DC7.pptx 업로드 완료
+2023-03-08 06:32:01.461 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 06:32:10.061 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 06:32:11.129 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 06:32:11.330 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 06:58:48.414 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 06:58:54.861 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 06:58:56.921 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 06:58:57.085 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 07:00:45.093 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 07:00:50.901 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 07:00:52.619 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 07:01:36.111 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 07:31:04.161 | [AWT-EventQueue-0]       | com.tool.document.DocumentManager    | INFO  | Document Manager - 시작
+2023-03-08 07:31:04.163 | [AWT-EventQueue-0]       | com.tool.document.DocumentManager    | INFO  | C:\Users\d1\AppData\Local\Temp\FileManager 작업 공간 설정.
+2023-03-08 07:31:04.246 | [AWT-EventQueue-0]       | c.t.d.s.watch.FileWatchService       | INFO  | 파일 모니터링 서비스 - 시작
+2023-03-08 07:31:34.483 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 07:31:41.356 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 07:31:42.282 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 07:31:46.706 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-03-08 07:37:21.714 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-03-08 07:37:28.611 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 로그인되었습니다.
+2023-03-08 07:38:14.270 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-03-08 07:38:19.782 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | admin_platform 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader

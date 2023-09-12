@@ -1,0 +1,9 @@
+2023-06-16 04:39:28.485 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-06-16 04:46:23.892 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | jhchung 로그인되었습니다.
+2023-06-16 04:46:28.334 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-06-16 04:46:30.158 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | jhchung 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMProjectLeader
+2023-06-16 04:46:45.630 | [Thread-3]               | com.tool.FileManager                 | WARN  | 파일 매니저 종료.
+2023-06-16 04:47:10.081 | [main]                   | com.tool.FileManager                 | INFO  | 파일 매니저 - 초기화
+2023-06-16 04:48:34.140 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 002150 로그인되었습니다.
+2023-06-16 04:48:37.973 | [pool-1-thread-1]        | com.tool.FileManager                 | INFO  | 파일 매니저 - 시작
+2023-06-16 04:48:39.171 | [pool-1-thread-1]        | com.tool.login.Login                 | INFO  | 002150 자격증명을 설정했습니다. | Common Space.Hyundai Everdigm.VPLMCreator

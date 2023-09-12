@@ -1,0 +1,12 @@
+#service url
+service.baseurl=tplm.hyundaieverdigm.com
+#session time
+session.timeout=1440
+#Buffer Time
+workspace.monitor.interval=1
+upload.wait.buffer=5
+#Workspace
+workspace=
+#user
+login.user = admin_platform
+login.pw = Qwer1234
